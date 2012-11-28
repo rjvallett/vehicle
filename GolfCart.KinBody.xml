@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kinbody name="test">
+	<modelsdir>models</modelsdir>
+	<body name="GolfCart" type="dynamic">
+		<geom type="trimesh" render="true">
+			<render>Golf_Cart.wrl    1</render>
+		</geom>
+	</body>
+	
+	<body name="GasPedal" type="dynamic">
+	<translation>0.43204 0.045 0.388457</translation>
+	<rotationaxis>0 1 0 113.56</rotationaxis>
+		<geom type="box">
+			<diffusecolor>1 0 0</diffusecolor>
+			<extents>0.120 0.045 0.015</extents>
+		</geom>
+	</body>
+	
+	<joint name="GasPedal" type="hinge" enabled="true">
+        <Body>GolfCart</Body>
+		<Body>GasPedal</Body>
+        <offsetfrom>GasPedal</offsetfrom>
+		<anchor>0.120 0 0.052335</anchor>
+		<axis>0 1 0</axis>
+		<limitsdeg>0 30</limitsdeg>
+	</joint>
+	<adjacent>GolfCart GasPedal</adjacent>
+	
+	<body name="SteeringWheel" type="dynamic">
+		<translation>0.401453 0.191178 0.843116</translation>
+		<rotationaxis>1 0 0 90</rotationaxis>
+		<rotationaxis>0 1 0 -49</rotationaxis>
+		<geom type="cylinder">
+			<diffusecolor>1 0 0</diffusecolor>
+			<height>0.7</height>
+			<radius>0.025</radius>
+		</geom>
+		<geom type="cylinder">
+			<diffusecolor>1 0 0</diffusecolor>
+			<translation>0 0.3375 0</translation>
+			<height>0.025</height>
+			<radius>0.180</radius>
+		</geom>
+	</body>
+	
+	<joint name="SteeringWheel" type="hinge" enabled="true">
+        <Body>GolfCart</Body>
+		<Body>SteeringWheel</Body>
+        <offsetfrom>SteeringWheel</offsetfrom>
+		<anchor>0 0 0</anchor>
+		<axis>0 1 0</axis>
+	</joint>
+	<adjacent>GolfCart SteeringWheel</adjacent>
+	
+	<body name="BrakePedal" type="dynamic">
+		<geom type="box">
+			<diffusecolor>1 0 0</diffusecolor>
+			<translation>0.493936 0.211 0.426061</translation>
+			<rotationaxis>0 1 0 119.86</rotationaxis>
+			<extents>0.057 0.08 0.018</extents>
+		</geom>
+		<geom type="box">
+			<diffusecolor>1 0 0</diffusecolor>
+			<translation>0.460802 0.211 0.336988</translation>
+			<rotationaxis>0 1 0 107.13</rotationaxis>
+			<extents>0.075 0.00625 0.017</extents>
+		</geom>
+	</body>
+	
+	<joint name="BrakePedal" type="hinge" enabled="true">
+        <Body>GolfCart</Body>
+		<Body>BrakePedal</Body>
+        <offsetfrom>BrakePedal</offsetfrom>
+		<anchor>0.438892 0.211 0.265891</anchor>
+		<axis>0 1 0</axis>
+		<limitsdeg>0 30</limitsdeg>
+	</joint>
+	<adjacent>GolfCart BrakePedal</adjacent>
+	
+	<body name="SteeringL" type="dynamic">
+		<translation>0.875621 0.439616 0.220</translation>
+	</body>
+	
+	<joint name="SteeringL" type="hinge" mimic_pos="atan2(1.64104*tan(SteeringWheel), 1.64104 - 0.439616*tan(SteeringWheel))" enabled="true">
+		<Body>GolfCart</Body>
+		<Body>SteeringL</Body>
+        <offsetfrom>SteeringL</offsetfrom>
+		<axis>0 0 1</axis>
+	</joint>
+	<adjacent>GolfCart SteeringL</adjacent>
+	
+	<body name="WheelFL" enabled="true">
+		<translation>0.875621 0.439616 0.220</translation>
+		<geom type="cylinder">
+			<diffusecolor>0 0 0</diffusecolor>
+			<height>0.220</height>
+			<radius>0.220</radius>
+		</geom>
+	</body>
+	
+	<joint name="WheelFL" type="hinge" circular="true" enabled="true">
+		<Body>SteeringL</Body>
+		<Body>WheelFL</Body>
+        <offsetfrom>WheelFL</offsetfrom>
+		<axis>0 1 0</axis>
+	</joint>
+	<adjacent>SteeringL WheelFL</adjacent>
+	<adjacent>GolfCart WheelFL</adjacent>
+	
+	<body name="SteeringR" type="dynamic">
+		<translation>0.875621 -0.439616 0.220</translation>
+	</body>
+	
+	<joint name="SteeringR" type="hinge" mimic_pos="atan2(1.64104*tan(SteeringWheel), 1.64104 + 0.439616*tan(SteeringWheel))" enabled="true">
+		<Body>GolfCart</Body>
+		<Body>SteeringR</Body>
+        <offsetfrom>SteeringR</offsetfrom>
+		<axis>0 0 1</axis>
+	</joint>
+	<adjacent>GolfCart SteeringR</adjacent>
+	
+	<body name="WheelFR" enabled="true">
+		<translation>0.875621 -0.439616 0.220</translation>
+		<geom type="cylinder">
+			<diffusecolor>0 0 0</diffusecolor>
+			<height>0.220</height>
+			<radius>0.220</radius>
+		</geom>
+	</body>
+	
+	<joint name="WheelFR" type="hinge" circular="true" enabled="true">
+		<Body>SteeringR</Body>
+		<Body>WheelFR</Body>
+        <offsetfrom>WheelFR</offsetfrom>
+		<axis>0 1 0</axis>
+	</joint>
+	<adjacent>SteeringR WheelFR</adjacent>
+	<adjacent>GolfCart WheelFR</adjacent>
+	
+	<body name="WheelRL" enabled="true">
+		<translation>-0.765418 0.439616 0.220</translation>
+		<geom type="cylinder">
+			<diffusecolor>0 0 0</diffusecolor>
+			<height>0.220</height>
+			<radius>0.220</radius>
+		</geom>
+	</body>
+	
+	<joint name="WheelRL" type="hinge" circular="true" enabled="true">
+		<Body>GolfCart</Body>
+		<Body>WheelRL</Body>
+        <offsetfrom>WheelRL</offsetfrom>
+		<axis>0 1 0</axis>
+	</joint>
+	<adjacent>GolfCart WheelRL</adjacent>
+	
+	<body name="WheelRR" enabled="true">
+		<translation>-0.765418 -0.439616 0.220</translation>
+		<geom type="cylinder">
+			<diffusecolor>0 0 0</diffusecolor>
+			<height>0.220</height>
+			<radius>0.220</radius>
+		</geom>
+	</body>
+	
+	<joint name="WheelRR" type="hinge" circular="true" enabled="true">
+		<Body>GolfCart</Body>
+		<Body>WheelRR</Body>
+        <offsetfrom>WheelRR</offsetfrom>
+		<axis>0 1 0</axis>
+	</joint>
+	<adjacent>GolfCart WheelRR</adjacent>
+	
+</kinbody>
